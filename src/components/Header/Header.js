@@ -24,10 +24,10 @@ const Header = () => {
           <Logo />
         </Side>
         <Nav>
-          <NavLink href="/sale">Sale</NavLink>
-          <NavLink href="/new">New&nbsp;Releases</NavLink>
-          <NavLink href="/men">Men</NavLink>
-          <NavLink href="/women">Women</NavLink>
+          <NavLink href="/sale">Long Sale</NavLink>
+          <NavLink href="/new">New&nbsp;Long Releases</NavLink>
+          <NavLink href="/men">Long Men</NavLink>
+          <NavLink href="/women">Long Women</NavLink>
           <NavLink href="/kids">Kids</NavLink>
           <NavLink href="/collections">Collections</NavLink>
         </Nav>
@@ -39,7 +39,7 @@ const Header = () => {
           <UnstyledButton>
             <Icon id="search" />
           </UnstyledButton>
-          <UnstyledButton>
+          <UnstyledButton onClick={() => setShowMobileMenu(true)}>
             <Icon id="menu" />
           </UnstyledButton>
         </MobileNav>
@@ -57,8 +57,37 @@ const MainHeader = styled.div`
   display: flex;
   align-items: baseline;
   padding: 18px 32px;
-  height: 72px;
   border-bottom: 1px solid ${COLORS.gray[300]};
+  overflow-x: auto;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+      border-radius: 16px;
+      background-color: #e5e5e5;
+  }
+
+  &::-webkit-scrollbar-thumb {
+      border-radius: 16px;
+      background-color: #acacac;
+
+      &:hover {
+          background-color: #6E7881;
+      }
+  }
+
+  // For IE
+  & {
+      scrollbar-face-color: #acacac;
+      scrollbar-track-color: #e5e5e5;
+  }
+
+  //For firefox
+  scrollbar-color: #acacac #e5e5e5;
+  scrollbar-width: thin;
 
   @media ${QUERIES.tabletAndUnder} {
     border-top: 4px solid ${COLORS.gray[900]};
@@ -68,7 +97,7 @@ const MainHeader = styled.div`
 
 const Nav = styled.nav`
   display: flex;
-  gap: 48px;
+  gap: clamp(1rem, 5vw - 2rem, 3rem);
   margin: 0px 48px;
 
   @media ${QUERIES.tabletAndUnder} {
@@ -97,6 +126,7 @@ const NavLink = styled.a`
   font-size: 1.125rem;
   text-transform: uppercase;
   text-decoration: none;
+  white-space: nowrap;
   color: ${COLORS.gray[900]};
   font-weight: ${WEIGHTS.medium};
 
